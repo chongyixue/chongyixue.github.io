@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homes on Yi Xue Chong</title>
-    <link>https://nitish2112.github.io/home/</link>
+    <link>https://chongyixue.github.io/home/</link>
     <description>Recent content in Homes on Yi Xue Chong</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2019 Yi Xue Chong</copyright>
     <lastBuildDate>Sat, 20 Apr 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://nitish2112.github.io/home/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chongyixue.github.io/home/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://nitish2112.github.io/home/about/</link>
+      <link>https://chongyixue.github.io/home/about/</link>
       <pubDate>Sat, 20 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://nitish2112.github.io/home/about/</guid>
+      <guid>https://chongyixue.github.io/home/about/</guid>
       <description>Biography I am a 6th year PhD candidate in J. C. Davis group at Cornell University. You can find my CV.</description>
     </item>
     
     <item>
       <title>Publications</title>
-      <link>https://nitish2112.github.io/home/publications/</link>
+      <link>https://chongyixue.github.io/home/publications/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://nitish2112.github.io/home/publications/</guid>
+      <guid>https://chongyixue.github.io/home/publications/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Posts</title>
-      <link>https://nitish2112.github.io/home/posts/</link>
+      <link>https://chongyixue.github.io/home/posts/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://nitish2112.github.io/home/posts/</guid>
+      <guid>https://chongyixue.github.io/home/posts/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Projects</title>
-      <link>https://nitish2112.github.io/home/projects/</link>
+      <link>https://chongyixue.github.io/home/projects/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://nitish2112.github.io/home/projects/</guid>
+      <guid>https://chongyixue.github.io/home/projects/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Contact</title>
-      <link>https://nitish2112.github.io/home/contact/</link>
+      <link>https://chongyixue.github.io/home/contact/</link>
       <pubDate>Fri, 10 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://nitish2112.github.io/home/contact/</guid>
+      <guid>https://chongyixue.github.io/home/contact/</guid>
       <description></description>
     </item>
     
