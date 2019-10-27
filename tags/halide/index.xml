@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Halide on Nitish Srivastava</title>
+    <link>https://nitish2112.github.io/tags/halide/</link>
+    <description>Recent content in Halide on Nitish Srivastava</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Nitish Srivastava</copyright>
+    <lastBuildDate>Mon, 10 Jul 2017 10:09:32 -0400</lastBuildDate>
+    
+	<atom:link href="https://nitish2112.github.io/tags/halide/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A brief overview of Halide</title>
+      <link>https://nitish2112.github.io/post/halide/</link>
+      <pubDate>Mon, 10 Jul 2017 10:09:32 -0400</pubDate>
+      
+      <guid>https://nitish2112.github.io/post/halide/</guid>
+      <description>THIS PAGE IS UNDER CONSTRUCTION
+Here I will talk about Halide
+In order to learn Halide, let&amp;rsquo;s start with a simple example and see how Halide will produce the code for that example
+Var x,y Func grad; Target target = get_host_target(); grad(x,y) = x + y; Halide::Image&amp;lt;int32_t&amp;gt; output = gradient.realize(100, 200);  Now let&amp;rsquo;s see how the Halide will interpret this code. The first three lines are nothing but defining Var and Funcs and the target where we will generate the code.</description>
+    </item>
+    
+  </channel>
+</rss>

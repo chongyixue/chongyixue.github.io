@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.40.1" />
+  <meta name="author" content="Nitish">
+  <meta name="description" content="PhD candidate at Computer System Laboratory">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="../../css/highlight.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.0/css/academicons.min.css" integrity="sha512-GGGNUPDhnG8LEAEDsjqYIQns+Gu8RBs4j5XGlxl7UfRaZBhCCm5jenJkeJL8uPuOXGqgl8/H1gjlWQDRjd3cUQ==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather%7CRoboto+Mono">
+  <link rel="stylesheet" href="../../css/hugo-academic.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-102911761-1', 'auto');
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  <link rel="alternate" href="https://nitish2112.github.io/index.xml" type="application/rss+xml" title="Nitish Srivastava">
+  <link rel="feed" href="https://nitish2112.github.io/index.xml" type="application/rss+xml" title="Nitish Srivastava">
+
+  <link rel="icon" type="image/png" href="../../img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="../../img/apple-touch-icon.png">
+
+  <link rel="canonical" href="https://nitish2112.github.io/post/gem5-minor-cpu/">
+
+  
+
+  <title>A Tutorial on the Gem5 Minor CPU Model | Nitish Srivastava</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../../">Nitish Srivastava</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#publications">
+            
+            <span>Publications</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#talks">
+            
+            <span>Talks</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#posts">
+            
+            <span>Posts</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#projects">
+            
+            <span>Projects</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#teaching">
+            
+            <span>Teaching</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#contact">
+            
+            <span>Contact</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">A Tutorial on the Gem5 Minor CPU Model</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2017-07-10 10:09:32 -0400 EDT" itemprop="datePublished">
+      Mon, Jul 10, 2017
+    </time>
+  </span>
+
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="../../tags/gem5">gem5</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fnitish2112.github.io%2fpost%2fgem5-minor-cpu%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=A%20Tutorial%20on%20the%20Gem5%20Minor%20CPU%20Model&amp;url=https%3a%2f%2fnitish2112.github.io%2fpost%2fgem5-minor-cpu%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnitish2112.github.io%2fpost%2fgem5-minor-cpu%2f&amp;title=A%20Tutorial%20on%20the%20Gem5%20Minor%20CPU%20Model"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fnitish2112.github.io%2fpost%2fgem5-minor-cpu%2f&amp;title=A%20Tutorial%20on%20the%20Gem5%20Minor%20CPU%20Model"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=A%20Tutorial%20on%20the%20Gem5%20Minor%20CPU%20Model&amp;body=https%3a%2f%2fnitish2112.github.io%2fpost%2fgem5-minor-cpu%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      <p></p>
+
+<p>This is an introduction tutorial on gem5 minor cpu model.</p>
+
+<p>Many a times it gets difficult for the computer architects to get started with event-driven simulators. This document is written to target that audience and provide an overview of the minor cpu model in gem5 which implements an in-order pipelined processor. If you have never worked on event-driven simulators and don&rsquo;t know what they are, there is a video <a href="https://www.youtube.com/watch?v=irbshkdVFao" target="_blank">here</a>. This tutorial will help the reader to understand how the event-driven minor cpu model is implemented in gem5 and will not go much into details of how to compile and build gem5, how to add tracing and what are ports and how do they work. This information can be found in <a href="http://learning.gem5.org/book/index.html" target="_blank">Learning Gem5</a>.</p>
+
+<h1 id="minor-cpu">Minor CPU</h1>
+
+<h2 id="pipeline">Pipeline</h2>
+
+<p>It is a 4 stage pipelined processor. The four stages being fetch1, fetch2, decode and execute. As opposed to 5-stage DLX pipeline that every computer architecture student is familiar with, this is somewhat different. The ITLB access, and fetch of the instruction from the main memory are done in fetch1. fetch2 is responsible for decoding the instruction, decode is responsible for just some book-keeping ( why this is a stage I am not sure at this point ) and execute implements the logic for issue, execute, memory, writeback and commit. All of these stages are defined as SimObjects in the class Pipeline which implements the entire pipeline. The different pipeline stages are connected via Latches ( we will talk about their implementation later in this tutorial ).</p>
+
+<pre><code class="language-c++">class Pipeline {
+    /* Latches to connect the stages */
+    Latch&lt;ForwardLineData&gt; f1ToF2;  
+    Latch&lt;BranchData&gt; f2ToF1;
+    Latch&lt;ForwardInstData&gt; f2ToD;
+    Latch&lt;ForwardInstData&gt; dToE;
+    Latch&lt;BranchData&gt; eToF1;
+
+    /* Pipeline Stages */
+    Execute execute; 
+    Decode decode;     
+    Fetch2 fetch2;
+    Fetch1 fetch1
+
+    /* Action to be performed at each cycle (tick) */
+    void evaluate();
+}
+</code></pre>
+
+<h2 id="execute">Execute</h2>
+
+<p>The way to think about an object/class is in terms of its data members, as they correspond to the physical data-structures that you will build in your hardware. The methods tell how these objects interact, which somewhat represents the wiring and the control. The main objects in the Execute stage are shown below:</p>
+
+<pre><code class="language-c++">class Execute {
+    Latch&lt;ForwardInstData&gt;::Output inp; // connected to dToE Latch
+    Latch&lt;BranchData&gt;::Input out; // connected to eToF1 Latch
+    /** Scoreboard of instruction dependencies */
+    std::vector&lt;Scoreboard&gt; scoreboard;
+    /** The execution functional units */
+    std::vector&lt;FUPipeline *&gt; funcUnits;
+    std::vector&lt;InputBuffer&lt;ForwardInstData&gt;&gt; inputBuffer;
+    void evaluate();
+}
+</code></pre>
+
+<p>Apart from the data-members, there is an evaluate() method which is the actiopn this stage has to perform at each CPU tick. As it can be seen from the implementation of Execute class that there are two wires one for input and one for output. The one named &ldquo;inp&rdquo; is connected to the output of dToE Latch and the one named &ldquo;out&rdquo; is connected to eToF1 Latch by the constructor of Pipeline class. The dToE Latch carries the instructions from decode to execute and eToF1 carries branch updates (the branch outcome is known only in execute) to the fetch1 stage. There is vector of objects of the class Scoreboard. Each element in the vector corresponds to a scoreboard for a thread. As the processor can be multithreaded this is necessary to seperate the scoreboards of different threads. In the rest of this tutorial, I will assume a single threaded processor, so only scoreboard[0] will be a valid entry. Same is the case for the funcUnits which is a vector of functional unit pipelines for different threads and inputBuffer. The figure below gives a pictorial representation of how the execute stage looks like.</p>
+
+<p><img src="execute.png" alt="execute" /></p>
+
+<h2 id="decode">Decode</h2>
+
+<p>The important data-structures and methods in the decode class are shown below:</p>
+
+<pre><code class="language-c++">class Decode {
+    Latch&lt;ForwardInstData&gt;::Output inp; // connected to f2ToD
+    Latch&lt;ForwardInstData&gt;::Input out;  // connected to dToE
+    /* references to execute.inputBuffer vector */
+    std::vector&lt;InputBuffer&lt;ForwardInstData&gt;&gt; &amp;nextStageReserve;  
+    std::vector&lt;InputBuffer&lt;ForwardInstData&gt;&gt; inputBuffer;
+    std::vector&lt;DecodeThreadInfo&gt; decodeInfo;
+    void evaluate();
+
+}
+</code></pre>
+
+<p>Similar to execute stage, decode contains one input wire and one output wire, but this time the input wire is carrying the decoded instruction from fetch2 to decode and the output wire is carrying the output instruction from decode to execute. As decode does not determine the outcome of branches there is no wire going from decode to fetch1 as in the case of execute. decode also contains an alias ( reference ) to the inputBuffer object of the execute stage. This reference is used to reserve an entry in the inputBuffer of the execute stage. By doing this decode makes sure that whatever instruction it is inserting in the dToE latch will have a place in the input buffer of the execute from which it executes the instructions.</p>
+
+<p><img src="decode.png" alt="decode" /></p>
+
+<h2 id="fetch2">Fetch2</h2>
+
+<p>The important data-structures and methods in fetch2 class are shown below:</p>
+
+<pre><code class="language-c++">class Fetch2 {
+  Latch&lt;ForwardLineData&gt;::Output inp;  // connected to f1ToF2
+  Latch&lt;BranchData&gt;::Output branchInp; // connected to eToF1
+  Latch&lt;BranchData&gt;::Input predictionOut; // coneected to f2ToF1
+  Latch&lt;ForwardInstData&gt;::Input out;      // connected to f2ToD
+  
+  std::vector&lt;InputBuffer&lt;ForwardInstData&gt;&gt; &amp;nextStageReserve
+  std::vector&lt;InputBuffer&lt;ForwardLineData&gt;&gt; inputBuffer;
+  std::vector&lt;Fetch2ThreadInfo&gt; fetchInfo;
+
+  BPredUnit &amp;branchPredictor;   // Branch Predictor
+
+  void evaluate();
+}
+</code></pre>
+
+<p>By now it should be clear what are the different components in the pipeline stages are. First of all there are some wires which are either input to the stage (and hence the Output of the Latch) or are outputs from the stage (Inputs to the Latches). Then there is an instruction buffer for each stage which holds entries of ForwardInstData or ForwardLine data which are just instructions wrapped in a class. Then at last there is a reference to the input buffer of the next stage and an evaluate() function which gets executed every clock tick. The main function that fetch2 is responsible for is decoding the instruction. The names can be sometimes misleading as the decode stage is not the one that does the real decoding. The decoding is indeed done in the fetch2 stage.</p>
+
+<p><img src="fetch2.png" alt="fetch2" /></p>
+
+<h2 id="fetch1">Fetch1</h2>
+
+<p>Not being so verbose fetch1 looks like this:</p>
+
+<pre><code class="language-c++">class Fetch1 {
+  Latch&lt;BranchData&gt;::Output inp;        // connected to eToF1
+  Latch&lt;ForwardLineData&gt;::Input out;    // connected to f1ToF2
+  Latch&lt;BranchData&gt;::Output prediction; // connected to f2ToF1
+  
+  std::vector&lt;InputBuffer&lt;ForwardLineData&gt;&gt; &amp;nextStageReserve;
+  
+  IcachePort icachePort;
+
+  FetchQueue requests;
+  FetchQueue transfers;
+  IcacheState icacheState;
+  InstSeqNum lineSeqNum;
+
+  void evaluate();
+  std::vector&lt;Fetch1ThreadInfo&gt; fetchInfo;
+}
+</code></pre>
+
+<p>Fetch1 is responsible for doing ITLB and ICache access. icachePort provides the interface between cache and fetch1. To learn more about ports refer <a href="http://learning.gem5.org/book/part2/memoryobject.html#define-a-slave-port-type" target="_blank">this</a>.</p>
+
+<p>Overall the pipeline looks like this:</p>
+
+<p><img src="pipeline.png" alt="pipeline" /></p>
+
+<h1 id="the-execution-of-the-pipeline">The execution of the pipeline</h1>
+
+<p>Now that we are aware of what are the key data-structures in each stage and how the CPU is connected to the pipeline and threads, we can look into how does the pipeline operate. Each pipeline has an event associated with it called &ldquo;event&rdquo; which is scheduled for every clock tick. Whenever the event fires, the evaluate() function of the pipeline class is called. The evaluate method of the pipeline class calls the evaluate method on each of the pipeline stages in the reverse order. The order here is important because the updates from the later stages of the pipeline should be visible to the earlier stages of the pipeline. Think of a very simple stall logic, if the execute stage decides to stall in the current cycle, fetch1, fetch2, and decode all should stall and should not change any state in the current cycle. This would not be possible if we evaluate the fetch1, fetch2 and decode before evaluating execute stage. The converse of this is however not true, as in conventional processor pipelines there are no feed-forward paths and hence the evaluation of later stages do not depend on the evaluation of earlier stages in the pipeline. Once all the stages are updated in the reverse order, the latches are advanced, which means in the two element buffer, the tail is pushed to the head and a space for new entry is made at the tail. The code looks somewhat like this:</p>
+
+<pre><code class="language-c++">void                                                                     
+Pipeline::evaluate()                                                     
+{                                                                        
+    /* Note that it's important to evaluate the stages in order to allow 
+     *  'immediate', 0-time-offset TimeBuffer activity to be visible from
+     *  later stages to earlier ones in the same cycle */                
+    execute.evaluate();                                                  
+    decode.evaluate();                                                   
+    fetch2.evaluate();                                                   
+    fetch1.evaluate();                                                                                                     
+                                                                         
+    /* Update the time buffers/latches after the stages */               
+    f1ToF2.evaluate(); 
+    f2ToF1.evaluate();                                                   
+    f2ToD.evaluate();                                                    
+    dToE.evaluate();                                                     
+    eToF1.evaluate();  
+}
+</code></pre>
+
+<p>Note that the Latches &ldquo;must&rdquo; be updated after all the stages as otherwise the stages will start popping wrong data from the Latches. The order of updates within the Latches do not matter.</p>
+
+<p>Now that we have settled on what the order of updates for the pipeline stages should be lets delve deeper into what the evaluate() method for each of the pipeline stage is doing.</p>
+
+<h2 id="execute-evaluation">Execute evaluation</h2>
+
+<p>The evaluate method for the execute stage looks something like this:</p>
+
+<pre><code class="language-c++">void 
+Execute::evaluate()
+{
+    // Set the dToE Latch data as the one to be pushed into input buffer next
+    inputBuffer[inp.outputWire-&gt;threadId].setTail(*inp.outputWire);
+
+    lsq.step(); // Step the Load-Store Queues
+    commit();   // Commit the instruction 
+    issue();    // Issue instructions whose dependencies are satisfied 
+
+    // Push the dToE Latch data into the input buffer
+    inputBuffer[inp.outputWire-&gt;threadId].pushTail();
+}
+</code></pre>
+
+<p>The commit method looks like this:</p>
+
+<pre><code class="language-c++">/** Commit takes an inst out from the head of the inflight inst queue and
+  * depending upon whether out of order memory requests are supported or
+  * not it commits the instruction, clears its destination entry from 
+  * scorebiard and remove it from the head of the inflight insts 
+*/
+void
+Execute::commit(){
+    // While issue() has already issued some instructions in the FUs 
+    while (executeInfo[tid].inFlightInsts-&gt;empty() 
+             &amp;&amp; num_insts_committed != commitLimit){
+
+        head_inflight_inst = executeInfo[tid].inFlightInsts.front();
+        inst = head_inflight_inst-&gt;inst;
+        mem_response = ( head_inflight_inst-&gt;inst-&gt;inLSQ ) ? 
+                                     lsq.findResponse() : NULL;
+
+        if (mem_response)
+            handleMemResponse(inst, mem_response, ...);
+        else {
+	    // If there is a load/store inflight try to commit it before the
+	    // the head of the inflight inst
+            if (!executeInfo[tid].inFUMemInsts-&gt;empty() &amp;&amp; lsq.canRequest()) {
+                fun_inst = execeuteInfo.inFUMemInsts.front().inst;
+                fu = funcUnits[ fun_inst-&gt;fuIndex ];
+                if (!fu_inst-&gt;inLSQ &amp;&amp; fu_inst-&gt;canEarlyIssue )
+                {
+                    try_to_commit = true;
+                    inst = fu_inst;
+                }
+            }
+	    // At this point depending on whether we are doing an early
+	    // issue of mem request or actually handling the head of the 
+	    // inflight inst. inst will be pointing to the corresponding inst
+            if (!completed_inst &amp;&amp; !inst-&gt;inLSQ) 
+            {
+                fu_inst = funcUnits[inst-&gt;fuIndex]-&gt;front();
+                if (fu_inst.inst-&gt;id == inst-&gt;id){
+                    try_to_commit = true;
+                    completed_inst = true;
+                }
+            }
+            if (try_to_commit)
+            {
+		// If there is a stream sequence mismatch i.e. inst is a post
+		// branch inst, then discard the inst.
+                discard_inst = 
+                     inst-&gt;id.streamSeqNum != executeInfo[tid].streamSeqNum;
+                if (!discard_inst)
+                    completed_inst = commitInst(...);
+            
+            }
+            if (completed_inst)
+            {
+                funcUnits[inst-&gt;fuIndex]-&gt;stalled = false;
+                executeInfo[tid].inFlightInsts-&gt;pop();
+                scoreboard[tid].clearInstDests(inst);
+            }             
+        }
+    }                 
+}
+
+LSQ::findResponse(inst) {
+  if (!transfers.empty()) {
+    LSQRequest* req = transfers.front();
+    if ((req-&gt;inst-&gt;id == inst-&gt;id) &amp;&amp; // same instruction
+        (req-&gt;isComplete()) ) { // request must be complete
+       return req;
+    }
+  }
+  return NULL;
+}
+
+Execute::handleMemResponse (inst, LSQRequest mem_response, ...) {
+  inst-&gt;staticInst-&gt;completeAcc(...);
+  lsq.popResponse();
+  ...
+}
+
+LSQ::popResponse(...){
+  transfers.pop();
+}
+</code></pre>
+
+<pre><code class="language-c++">void 
+Execute::commitInst( inst, branch )
+{
+    if (inst-&gt;isMemRef()) // load/store instruction
+    {
+        inst-&gt;staticInst-&gt;initiateAcc(); // this will eventually push inst on LSQ's request queue
+	completed_inst = true;
+    }
+    else  // other arithmetic instructions
+    {
+	// Execute the instruction and write the result in register file
+	// If the instruction is a branch instruction it updates the thread._pcState
+	inst-&gt;staticInst-&gt;execute();
+
+	target = thread-&gt;pcState();
+	pc_before = inst-&gt;pc;
+	if ( inst-&gt;predictedTaken ){
+	   if ( inst-&gt;predictedTarget == target )
+		// .. update branch variable for corect prediction
+	   else
+		// .. update for wrongly predicted 
+        }
+    }
+}
+</code></pre>
+
+<pre><code class="language-c++">/** Takes a set of instructions out to the inputBuffer. If the dependencies
+ *  are satisfied keeps issuing the instructions bhy pushing them to FU 
+ *  and marking the dests in scoreboard. It stops and removes the instruction
+ *  from the inputBuffer in case all the insts in Latch are sent to the FUs. It
+ *  also stops in the case when any of the inst is dependent on some previous
+ *  inst. In this case any of insts after that are also not scheduled
+*/
+void 
+Execute::issue ( inst )
+{
+    inst_in = inputBuffer[tid].front();
+
+    do {
+	issued = false;
+	inst = insts_in-&gt;insts[thread.inputIndex];
+	for ( fu_idx = 0; fu_idx &lt; numFuncUnits; fu_idx++ ){
+	    fu = funcUnits[fu_idx];
+	    if ( !fu-&gt;stalled &amp;&amp; fu-&gt;provides(inst) ){
+		// Check scoreboard to see if inst depends on previous insts
+		if ( scoreBoard.canInstIssue(inst) ){
+		    fu-&gt;push( inst );
+		    // Mark the destination regs in the scoreboard
+		    scoreBoard.markupInstDest(inst); 
+		    executeInfo[tid].inFlightInsts.push(inst);
+		    issued = true;
+		}
+	    }
+	}
+	if (executeInfo[tid].inputIndex == insts_in-&gt;width() ){
+	    inputBuffer[tid].pop();	
+	    inst_in = NULL;
+	}
+    } while ( inst_in &amp;&amp; issued )
+}
+</code></pre>
+
+<h2 id="fetch2-evaluation">Fetch2 evaluation</h2>
+
+<pre><code class="language-c++">void
+fetch2::evaluate()
+{
+    // Mark the data in the f1ToF2 Lacth as the one to be 
+    // pushed to the inputBuffer next
+    inputBuffer[tid].setTail(*inp.OutputWire); // f1ToF2
+
+    ForwardInstData &amp;insts_out = *out.inputWire; // f2ToD
+    BranchData &amp;branch_inp = *branchInp.outputWire; // eToF1
+
+    // React to branches from execute stage to update local branch
+    // prediction structures (update the branch predictor itself)
+    updateBranchPrediction(branch_inp);    
+
+    // thread will be blocked if no space in decode's inputBuffer
+    fetchInfo[tid].blocked = !nextStageReserve[tid].canReserve();
+
+    if ( fetchInfo[tid].expectedStreamSeqNum == inputBuffer[tid].front()-&gt;id.streamSeqNum 
+	&amp;&amp; fetchInfp[tid].predictionSeqNum != inputBuffer[tid].front()-&gt;id.predictionSeqNum )
+		inputBuffer[tid].pop();
+
+    line_in = inputBuffer[tid].front();
+    
+    // Discard the instructions for which Fetch2 predicted sequence number is 
+    // different from the one with fetch1 fetched these instructions i.e. discard 
+    // the instructions which are fetched not complying to branch pred decision in fetch2
+    if ( line_in &amp;&amp; fetchInfo[tid].expectedStreamSeqNum == line_in-&gt;id.streamSeqNum 
+              &amp;&amp; fetchInfo[tid].predictionSeqNum != line_in-&gt;id.predictionSeqNum) {
+        inputBuffer.pop();
+    }
+
+    // fetch1 sends an entire caache line to fetch2 and not just a single inst
+    // fetch2 depending on what the output width is decodes that many insts.
+    // This decoding in hardware can be done using multiple decoders or
+    // a single decoder time-multiplexed. 
+    while ( line_in &amp;&amp; fetchInfo[tid].inputIndex &lt; line_in-&gt;lineWidth
+             &amp;&amp; outputIndex &lt; outputWidth )
+    {
+	fetchInfo.pc = line_in-&gt;pc;
+        dyn_inst = new MinorDynInst(line_in-&gt;id);
+	// Decode the instruction
+        decoded_inst = decoder-&gt;decode(fetchInfo[tid].pc);
+	// Advance the PC
+        TheISA::advancePC (fetchInfo[tid].pc, decoded_inst);
+	// Calls branchPredictor.predict() if the inst is a Control inst
+	// and updates prediction variable for new stream and prediction sequence numbers
+        predictBranch(dyn_inst, prediction);
+	insts_out.insts[output_index++] = dyn_inst;
+	if ( !prediction.isBubble() )
+	    line_in = NULL;
+	else if ( fetchInfp[tid[.inputIndex == line_in-&gt;lineWidth ) 
+	    inputBuffer[tid].pop();
+   }
+   if ( !inst_out.isBubble() )
+        nextStageReserve[tid].reserve();
+
+   if ( !inp.outputWire-&gt;isBubble )
+        inputBuffer[inp.outputWire-&gt;id.threadId].pushTail();        
+}
+</code></pre>
+
+<h2 id="fetch1-evaluation">Fetch1 evaluation</h2>
+
+<pre><code class="language-c++">void
+fetch1::evaluate()
+{
+    BranchData &amp;execute_branch = *inp.outputWire;  // eToF1
+    BranchData &amp;fetch2_branch = *prediction.outputWire; // f2ToF1
+    ForwardLineData &amp;line_out = *out.inputWire; // f1ToF2
+
+    fetchInfo[tid].blocked = !nextStageReserve[tid].canReserve();
+
+    // Prioritize the branch stream change of execute over fetch2
+    if ( execute_branch.isStreamChange() )
+    {
+	// updates the fetchInfo[tid].pc to branch target. updates the stream 
+	// sequence number and prediction sequence number in fetcInfo[tid]
+	changeStream( execute_branch )
+    }
+    else if ( fetch2_branch.isStreamChange() )
+    {
+	changeStream( fetch2_branch );
+    }
+
+    // Pushes the fetch memory request to the request queue, reserves a slot for
+    // it in the transfers queue and does an ITLB access. 
+    // It also updates the PC by +4 ( as no branch predictor in fetch1 ) 
+    fetchLine(tid);
+
+    nextStageReserve.reserve();
+
+    // If the ICache is not busy, it tries to send fetch request to ICache
+    // if successful it moves the request from request queue to transfers queue.
+    stepQueues();
+
+    // The head of the transfers queue is a completed fetch request
+    if ( !transfers.empty() &amp;&amp; transfer.front()-&gt;isComplete() )
+    {
+	line_out.pc = transfers.front().pc;
+	line_out.line = transfers.front()-&gt;data;
+	popAndDiscard(transfers);
+    }
+}
+</code></pre>
+
+<h1 id="instructions">Instructions</h1>
+
+<p>Each cpu has its own class for dynamic instruction for e.g. for minor cpu this is defined in dyn_inst.cc as class MinorDynInst. Each Dynamic instruction class has an object of class StaticInst. StaticInst is an abstract class whose execute() method is purely virtual. It provides a base abstract class for all the different kinds of instructions in the ISA. Based on which ISA you are compiling gem5 with, the build system generates a class for each of the instructions in the ISA which is derived from StaticInst class and it has the execute method which can be used to execute the instruction and update the register file. Go to the file build/RISCV/arch/riscv/generated/decoder-ns.hh.inc and you will see all the classes for different instructions. The execute method for these classes are implemented in build/RISCV/arch/riscv/generated/exec-ns.cc.inc . To know more on how these classes got built with gem5 please refer to my tutorial on [How to add instruction to RISCV ISA and simulate on gem5](). gem5 minor cpu model does not read the registers while being issued to the functional unit pipelines. Instead, the function unit pipelines are just to model the delays and all the execution is done by calling execute() method in commitInst() method in the execute unit.</p>
+
+<h1 id="instruction-fetch">Instruction Fetch</h1>
+
+<p>The important part of instruction fetch is virtual address translation. This is done by calling cpu.thread.itb.translateTiming(request). The TLB is implemented in srch/riscv/tlb.cc and calls thread.threadContext.process.pTable.translate(req). Process class is implemented in sim/process.hh and has pTable of Class PageTableBase implemented in mem/page_table.cc. The translate method tries to translate the virtual address to a physical address and then stores the physical address in req.paddr. translateTimming(req, translation) then calls translation-&gt;finish() which calls the finish() method on the BaseTLB::Translation object in the fetch1 unit.</p>
+
+<h1 id="instruction-decoding">Instruction Decoding</h1>
+
+<p>The fetch2 stage has decoder which belongs to the class TheISA::Decoder. For RISCV ISA its implementation can be found in src/arch/riscv/decoder.hh. The Decoder has two important functions moreBytes(pc,inst) and decode(nextPC). moreBytes is used to copy the 32-bit instruction into the decoder so that when decode() is invoked it can decode the instruction. However, each decoder calls a GenericISA::BasicDecodeCache::decode() method. This method is implemented in src/arch/generic/decode_cache.cc. This looksup if it has already decoded this instruction in the decodePages and instMap cache structures, if it does not find it there it calls the decodeInst() method of the original decoder. This is a templated method in src/arch/isa_parser.py. Whenever gem5 is compiled for specific ISA for eg. RISCV build/RISCV/arch/riscv/generated/decode-method.cc.inc gets generated which has the decodeInst(machInst) method. It mostly does nothing, just sees the OPCODE and FUNC bits of the instruction and in a switch case create an object of that particular instruction by calling its constructor. All these instruction classes are defined in build/RISCV/arch/riscv/generated/decoder-ns.hh.inc and are derived from the StaticInst class. The constructors of the instructions&rsquo; classes and the base StaticInst class initialize the members like number of source and destinations registers, the immediate value, machInst(actual instruction in binary). The constructors of these instruction classes are given in build/RISCV/arch/riscv/generated/decoder-ns.cc.inc with their class definitions in build/RISCV/arch/riscv/generated/decoder-ns.hh.inc. To create a dynamic instruction the machine instruction is passed to the decoder which creates a StaticInt object and returns it. This StaticInst object is then stick into the object of dynamic instruction.</p>
+
+<h1 id="squashing-in-minor-cpu">Squashing in minor cpu</h1>
+
+<h1 id="function-units">Function Units</h1>
+
+<pre><code class="language-c++">// Here QeueuedInst is just a wrapper around MinorDynInst
+typedef SelfStallingPipeline&lt; QueuedInst, ReportTraitsAdaptor&lt;QueuedInst&gt; &gt; FUPipelineBase;
+
+class FUPipeline : public FUPipelineBase, public FuncUnit {
+  LaneFU &amp;description; 
+  std::bitset&lt;Num_OpClasses&gt; capabilityList;  
+}
+
+clas LaneFU : public SimObject {
+  Cycles opLat; // Latency
+  Cycles issueLat; // Delay after issuing an operation before next is issued.
+                   // normally 1 due to pipelining, but for divide unit as it 
+                   // is not pipelined it is &gt; 1
+
+  std::vector&lt;LaneFUTiming *&gt; timings;  
+}
+
+class LaneFUTiming : public SimObject {
+  Cycles extraCommitLat;
+  Cycles extraAssumedLat; // extra delay to show in scoreboard after inst leaving
+                          // the pipeline. Normally 0 but for mult it is 2
+
+   
+   /* for each of this instruction's source registers (in srcRegs
+   *  order). The offsets are subtracted from scoreboard returnCycle times.
+   *  For example, for an instruction type with 3 source registers,
+   *  [2, 1, 2] will allow the instruction to issue upto 2 cycles early
+   *  for dependencies on the 1st and 3rd register and upto 1 cycle
+   *  early on the 2nd. */
+
+  // ?? not so sure but if the list has a single number then latencies for
+  // all the src regs is the same?? eg. for LaneDefaultIntFU it is [2]
+  // and LaneDefaultIntMulFU it is [0]
+  std::vector&lt;Cycles&gt; srcRegsRelativeLats; 
+  
+}
+</code></pre>
+
+<h1 id="scoreboard">ScoreBoard</h1>
+
+<pre><code class="language-c++">class Scoreborad : public Named {
+  std::vector&lt;int&gt; fuIndices; 
+
+  // number of results which are not predictable ( memory loads in general )
+  std::vector&lt;Index&gt; numUnpredictableResults;
+
+  // estimated cycle number that the result will be presented.
+  std::vector&lt;Cycles&gt; returnCycle;
+}
+
+// Called before issuing an instruction
+void Scoreboard::markupInstDests(Cycles retire_time, bool mark_unpredictable ) {
+  for ( dest_index = 0; dest_index &lt; num_dests; dest_index++ ) {
+    reg = flattenRegIndex(staticInst-&gt;destRegIdx(dest_index));
+    numResults[reg]++;
+    if (mark_unpredictable)
+      numUnpredictableResults[reg]++;
+    returnCycle[reg] = retire_time; // retire_time is curCycle() + inst-&gt;fu-&gt;opLat
+    fuIndices[reg] = inst-&gt;fuIndex; // save the function unit id for this dest reg
+  }
+} 
+
+bool Scoreboard::canInstIssue( std::vector&lt;Cycles&gt; *src_reg_relative_latencies,
+                               // srcRegRelativeLats for that inst. see LaneFUTiming above
+			       std::vector&lt;bool&gt; *cant_forward_from_fu_indices ) {
+
+   for ( src_index = 0; src_index &lt; inst-&gt;numSrcRegs(); src_index++ ) {
+     reg = flattenRegIndex(staticInst-&gt;srcRegIdx(src_index));
+     Cycles relative_latency = src_index &gt;= src_reg_relative_latencies-&gt;size()-1 ?
+			         src_reg_relative_latencies-&gt;back() // last element
+			       : *(src_reg_relative_latencies)[src_index];
+
+     if ( returnCycle[reg] &gt; curCycle() + relativeLatency )
+       return false;     
+   }
+
+   return true;
+}
+			      
+void Scoreboard::clearInstDests(inst, bool clear_unpredictable) {
+
+  for ( dest_index = 0; dest_index &lt; num_dests; dest_index++ ) {
+    RegIndex reg = inst-&gt;flatDestRegIdx[dest_index];
+    if ( clear_unpredictable )
+      numUnpredictableResults[reg]--;
+
+    numResults[reg]--;
+
+    if (numResults[reg] == 0) {
+      returnCycle[reg] = Cycles(0);
+      writingInst[reg] = 0;
+      fuIndices[reg] = -1;
+    }
+  }
+} 
+</code></pre>
+
+<h1 id="load-store-queue-lsq">Load-Store queue (LSQ)</h1>
+
+<p>Load store queue is used for performing load/store operations. It has three major hardware FIFOs: requests queue, transfers queue, and store buffer. Requests queue holds the memory requests which have been sent to the TLB but haven&rsquo;t received the response for. Transfers queue holds the memory requests which have been issued to the memory system and are waiting for a response. When the responses arrive, the corresponding request is searched in the transfers queue (CAM like search) and its status is set to be Completed. These requests still remain in the transfers queue until the execute unit actually tries to commit the load/store instruction. When execute unit tries to commit load/store, it looks at the front of the transfers queue and pops out the element if the memory access was completed (see the execute unit description above). Store buffer has all the stores that have been committed but haven&rsquo;t been written to memory yet. Before trying to issue a load from requests queue to memory, store buffer is checked to see if the previous store contains the data. The main top level function for LSQ is step()  which is called in the evaluate() method of the execute unit.</p>
+
+<pre><code class="language-c++">LSQ::step() {
+  tryToSendToTransfers(requests.front());
+  storeBuffer.step()
+}
+
+LSQ::tryToSendToTransfers(LSQRequest* request) {
+  // note that LSQRequest is not of type Request but a derived class 
+  // from BaseTLB::Translation and Packet::SenderState
+  LSQRequest request = requests.front();
+  
+  if (request-&gt;isComplete()) {
+    // LSQ::moveFromRequestsToTransfers(LSQRequestPtr request)
+    requests.pop();
+    transfers.push(request);
+  }
+  
+  if (!(request-&gt;isLoad &amp;&amp; storeBuffer.canForwardData())) {
+    if (tryToSend(request)) {
+      requests.pop();
+      transfers.push(request);
+    }
+  }
+}
+
+LSQ::tryToSend(LSQRequest* request) {
+  dacachePort.sendTimingRequest(request-&gt;packet);
+  // Set the state of the request appropriately depending on success or failure.
+}
+
+LSQ::recvTimingResp(Packet* response) {
+  // the packet for memory requests contain LSQRequest pointers (can think of 
+  // ids associated to each request that has been sent so far).
+  // These LSQRequests are stored in transfers queue. When a memory response
+  // is received the corresponding entry is searched in transfers queue and
+  // its status is set to Complete. In real hardware this process should be
+  // to search for the corresponding id location and then flip the status bit.
+  // Search in a queue can be done using CAM based approach.
+  response-&gt;popSenderState()-&gt;setStatus(Complete);
+}
+
+LSQ::StoreBuffer::step() {
+  LSQRequest** i = slots.begin();
+  while (issued &amp;&amp; issue_count &lt; StoreLimit &amp;&amp; i!=slots.end()) {
+    LSQRequest* request = *i;
+    lsq.tryToSend(request);
+  }
+}
+
+</code></pre>
+
+<p>Other important functions are pushRequest(): called by the exec_context.hh in initiateMemRead() function. pushRequest() calls</p>
+
+<pre><code class="language-c++">LSQ::pushRequest() {
+  if (!isLoad)
+    request_data = new uint8_t[size];
+  
+  LSQrequest* request = new SingleDataRequest();
+  request-&gt;request.setContext();
+  request-&gt;request.setVirt();
+  requests.push(request);
+  // request-&gt;startAddrTranslation(); 
+  thread-&gt;getDTBPtr()-&gt;translateTiming(request-&gt;request);
+  // TranslateTiming calls the finish() method when done with translation
+}
+
+LSQ::SingleDataRequest::finish() {
+  makePacket();
+  port.tryToSendToTransfers();
+}
+
+LSQ::LSQRequest::makePacket() {
+  // packet = makePacketForRequest(request, data);
+  Packet* packet = isLoad ? Packet::createRead(&amp;request)
+                          : Packet::createWrite(&amp;request);
+
+  packet-&gt;pushSenderState(this);
+  if (isLoad) packet-&gt;allocate();
+  else        packet-&gt;dataDynamic(data);
+
+  data = NULL;
+}
+
+</code></pre>
+
+<h1 id="caches-in-gem5">Caches in gem5</h1>
+
+<p>L1Cache, L1_ICache, L1_DCache, L2Cache, IOCache and  PageTableWalkerCache all are derived from class Cache by ovewriting the latency and size configurations. class Cache is defined in src/mem/cache/cache.hh and is the child class of BaseCache in src/mem/cache/base.hh.</p>
+
+<pre><code class="language-c++">class BaseCache {
+  // internal data structures
+  MSHRQueue mshrQueue;
+  WriteQueue writeBuffer;
+
+  // parameters
+  int blkSize;
+  Cycles lookupLatency;
+  Cycles dataLatency;
+  Cycles forwardLatency;
+  Cycles fillLatency;
+  Cycles responseLatency;
+  int numTargets;
+};
+
+class Cache : public BaseCache {
+  // internal data structures
+  BaseTags *tags;
+  BasePrefetcher *prefetcher;
+};
+
+class BaseTags {
+  int blkSize; // cache line size
+               // since cache line size should be same for all cache levels
+               // blkSize is a property of &quot;system&quot; and not just a cache.
+               // hence this is set in config by &quot;system.cache_line_size = ..&quot;
+               // and Tags.py copies that parameter into blkSkize variable 
+  int size; // size of cache
+  ...
+};
+
+/* There are many types of tag stores derived from BbaseTags
+ * BaseTags -&gt; BaseSetAssoc  ------&gt; LRU
+ *            (set associative |---&gt; RandomRepl
+ *                 caches)
+ * BaseTags -&gt; FALRU -&gt; 
+ *           (fully assoc.
+ *               LRU)
+ */
+</code></pre>
+
+<p>Which cache parameters we actually use is set in configs/common/Caches.py.
+The specific tag store can either be set in common/caches/Caches.py. The
+default tag store can be seen in src/mem/caches/Caches.py as LRU mostly.
+Now, since LRU is most common, let&rsquo;s understand LRU tag store</p>
+
+<pre><code class="language-c++">class BaseSetAssoc : public BaseTags {
+  // data structures
+  CacheSet&lt;CacheBlk&gt;* sets; // cache sets
+  CacheBlk* blks; // cache blocks
+  uint8_t* dataBlks; // data blocks (1 per cache block)
+
+  // parameters
+  int assoc; // associativity
+  itn numSets;
+};
+
+class CacheBlk  {
+  enum CacheBlkStatusBits {..., BlkDirty, ....};
+
+  Addr tag; // data block tag value
+  unit8_t* data; // contains copy of data for easy access
+  int set, way; // set and ay this block belongs to
+};
+
+template &lt;class BlkType&gt;
+class CacheSet {
+  int assoc; // associativity of this set
+  BlkType **blks; // cache blocks in this set
+};
+</code></pre>
+
+<p>The recvTimingReq() method for the non-blocking cache looks like this:</p>
+
+<pre><code class="language-c++">Cache::recvTimingReq() {
+  CacheBlk* blk = NULL; 
+  std::list&lt;PacketPtr&gt; writebacks;
+  bool satisfied = access(pkt, blk, writebacks);
+  doWritebacks(writebacks);
+  if (satisfied) {
+    if (pkt-&gt;needsResponse()) {
+      pkt-&gt;makeTimingResponse();
+      cpuSidePort-&gt;schedTimingResp(pkt, request_time);
+    }
+  }
+}
+
+Cache::access(pkt, blk, writebacks) {
+  blk = tag-&gt;accessBlock(pkt);
+}
+
+LRU::accessBlock(pkt, is_secure, &amp;lat) { 
+  // LRU class is derived from BaseSetAssoc class
+  CacheBlk * blk = BaseSetAssoc::accessBlock(pkt-&gt;getAddr(), is_secure, &amp;lat);
+  // move the block to the head of MRU
+  sets[blk-&gt;set].moveToHead(blk); 
+  return blk;
+}
+
+BaseSetAssoc::accessBlock(addr, is_secure, &amp;lat) {
+  Addr tag = extractTag(addr);
+  int set = extractSet(addr);
+  blk = sets[set].findBlk(tag);
+  lat = accessLatency;
+}
+
+template &lt;class Blktype&gt;
+CacheSet&lt;Blktype&gt;::findBlk(tag, is_secure) {
+  for (int i = 0; i &lt; assoc; ++i) {
+    if (blks[i]-&gt;tag == tag &amp;&amp; blks[i]-&gt;isValid() &amp;&amp;
+      blks[i]-&gt;isSecure() == is_secure) {
+      way_id = i;
+      return blks[i];
+    }
+  }
+  return nullptr;
+}
+</code></pre>
+
+<h1 id="function-units-1">Function Units</h1>
+
+<p>The function units and what operations they can perform is described in MinorCPU.py by setting the variable &ldquo;executeFuncUnits&rdquo;. It by default uses MinorDefaultFUPool class which is defined in MinorCPU.py as well and creates a pool of function units (2: Int, 1: Int-mul, 1: int-div, 1: float-simd, 1: mem, 1: misc)</p>
+
+<p>Functional unit pipelines can be of variable depth, so this is modelled by the class FUPipeline which is derived from FUPipelineBase which is basically SelfStallingPipeline derived from TimeBuffer. The depth the FUPipelines are set in the Python file MinorCPU.py. The opLat parameter in MinorDefaultIntFU etc are the pipeline depths that get assigned to the depth of the SelfStalling pipelines.</p>
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="https://nitish2112.github.io/post/halide/"><span
+      aria-hidden="true">&larr;</span> A brief overview of Halide</a></li>
+    
+
+    
+    <li class="next"><a href="https://nitish2112.github.io/post/gem5-memory-model/">A Tutorial on the Gem5 Memory Model <span
+      aria-hidden="true">&rarr;</span></a></li>
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+<section id="comments">
+  <div id="disqus_thread">
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nitish2112-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2016 Nitish Srivastava &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.2/imagesloaded.pkgd.min.js" integrity="sha512-iHzEu7GbSc705hE2skyH6/AlTpOfBmkx7nUqTLGzPYR+C1tRaItbRlJ7hT/D3YQ9SV0fqLKzp4XY9wKulTBGTw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js" integrity="sha512-Z5heTz36xTemt1TbtbfXtTq5lMfYnOkXM2/eWcTTiLU01+Sw4ku1i7vScDc8fWhrP2abz9GQzgKH5NGBLoYlAw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/plugins/ScrollToPlugin.min.js" integrity="sha512-CDeU7pRtkPX6XJtF/gcFWlEwyaX7mcAp5sO3VIu/ylsdR74wEw4wmBpD5yYTrmMAiAboi9thyBUr1vXRPA7t0Q==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    
+    <script src="../../js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+

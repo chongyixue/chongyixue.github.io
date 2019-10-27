@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.40.1" />
+  <meta name="author" content="Nitish">
+  <meta name="description" content="PhD candidate at Computer System Laboratory">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="../../css/highlight.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.0/css/academicons.min.css" integrity="sha512-GGGNUPDhnG8LEAEDsjqYIQns+Gu8RBs4j5XGlxl7UfRaZBhCCm5jenJkeJL8uPuOXGqgl8/H1gjlWQDRjd3cUQ==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather%7CRoboto+Mono">
+  <link rel="stylesheet" href="../../css/hugo-academic.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-102911761-1', 'auto');
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  <link rel="alternate" href="https://nitish2112.github.io/index.xml" type="application/rss+xml" title="Nitish Srivastava">
+  <link rel="feed" href="https://nitish2112.github.io/index.xml" type="application/rss+xml" title="Nitish Srivastava">
+
+  <link rel="icon" type="image/png" href="../../img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="../../img/apple-touch-icon.png">
+
+  <link rel="canonical" href="https://nitish2112.github.io/post/adding-instruction-riscv/">
+
+  
+
+  <title>Adding custom instruction to RISCV ISA and running it on gem5 and spike | Nitish Srivastava</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../../">Nitish Srivastava</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#publications">
+            
+            <span>Publications</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#talks">
+            
+            <span>Talks</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#posts">
+            
+            <span>Posts</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#projects">
+            
+            <span>Projects</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#teaching">
+            
+            <span>Teaching</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="../../#contact">
+            
+            <span>Contact</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Adding custom instruction to RISCV ISA and running it on gem5 and spike</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2017-07-10 10:09:32 -0400 EDT" itemprop="datePublished">
+      Mon, Jul 10, 2017
+    </time>
+  </span>
+
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="../../tags/gem5">gem5</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fnitish2112.github.io%2fpost%2fadding-instruction-riscv%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Adding%20custom%20instruction%20to%20RISCV%20ISA%20and%20running%20it%20on%20gem5%20and%20spike&amp;url=https%3a%2f%2fnitish2112.github.io%2fpost%2fadding-instruction-riscv%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnitish2112.github.io%2fpost%2fadding-instruction-riscv%2f&amp;title=Adding%20custom%20instruction%20to%20RISCV%20ISA%20and%20running%20it%20on%20gem5%20and%20spike"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fnitish2112.github.io%2fpost%2fadding-instruction-riscv%2f&amp;title=Adding%20custom%20instruction%20to%20RISCV%20ISA%20and%20running%20it%20on%20gem5%20and%20spike"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Adding%20custom%20instruction%20to%20RISCV%20ISA%20and%20running%20it%20on%20gem5%20and%20spike&amp;body=https%3a%2f%2fnitish2112.github.io%2fpost%2fadding-instruction-riscv%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      <p>
+This is a tutorial on how to add an instruction to the RISCV ISA, how to write program with the special instruction. I will also talk about how to add the new instruction to RISCV assembler and how to execute it on gem5.</p>
+
+<p>First of all download and install the riscv-tools:</p>
+
+<pre><code class="language-bash">$ git clone https://github.com/riscv/riscv-tools.git
+$ git submodule update --init --recursive
+$ export RISCV=/path/to/install/riscv/toolchain
+$ ./build.sh
+</code></pre>
+
+<p>This will build the riscv toolchain. Now we will add a &ldquo;modulo&rdquo; instruction to the ISA. The instruction and its semantics are given below:</p>
+
+<pre><code class="language-bash">mod r1, r2, r3
+
+Semantics:
+R[r1] = R[r2] % R[r3]
+</code></pre>
+
+<p>Open the file riscv-opcodes/opcodes, here you will be able to see the various opcodes and instruction bits assigned to various instructions. Assigned an unused instruction to modulo inst.</p>
+
+<pre><code class="language-bash">sra     rd rs1 rs2 31..25=32 14..12=5 6..2=0x0C 1..0=3
+or      rd rs1 rs2 31..25=0  14..12=6 6..2=0x0C 1..0=3
+and     rd rs1 rs2 31..25=0  14..12=7 6..2=0x0C 1..0=3
+
+mod     rd rs1 rs2 31..25=1  14..12=0 6..2=0x1A 1..0=3
+
+addiw   rd rs1 imm12            14..12=0 6..2=0x06 1..0=3
+slliw   rd rs1 31..25=0  shamtw 14..12=1 6..2=0x06 1..0=3
+srliw   rd rs1 31..25=0  shamtw 14..12=5 6..2=0x06 1..0=3
+sraiw   rd rs1 31..25=32 shamtw 14..12=5 6..2=0x06 1..0=3
+</code></pre>
+
+<p>Now run the following command:</p>
+
+<pre><code class="language-bash">cat opcodes-pseudo opcodes opcodes-rvc opcodes-rvc-pseudo opcodes-custom | ./parse-opcodes -c &gt; ~/temp.h
+</code></pre>
+
+<p>Open file temp.h and you will find the following two lines:</p>
+
+<pre><code class="language-C">#define MATCH_MOD 0x200006b                                                    
+#define MASK_MOD 0xfe00707f
+</code></pre>
+
+<p>Add these two lines in riscv-gnu-toolchain/riscv-binutils-gdb/include/opcode/riscv-opc.h</p>
+
+<p>Now edit riscv-gnu-toolchain/riscv-binutils-gdb/opcodes/riscv-opc.c and add this line in the assignment of const struct riscv_opcode riscv_opcodes[]:</p>
+
+<pre><code class="language-C">const struct riscv_opcode riscv_opcodes[] =                                     
+{                                                                               
+/* name,      isa,   operands, match, mask, match_func, pinfo.  */              
+{&quot;unimp&quot;,     &quot;C&quot;,   &quot;&quot;,  0, 0xffffU,  match_opcode, 0 },                       
+{&quot;unimp&quot;,     &quot;I&quot;,   &quot;&quot;,  MATCH_CSRRW | (CSR_CYCLE &lt;&lt; OP_SH_CSR), 0xffffffffU,  match_opcode, 0 }, /* csrw cycle, x0 */
+{&quot;ebreak&quot;,    &quot;C&quot;,   &quot;&quot;,  MATCH_C_EBREAK, MASK_C_EBREAK, match_opcode, INSN_ALIAS },
+{&quot;ebreak&quot;,    &quot;I&quot;,   &quot;&quot;,    MATCH_EBREAK, MASK_EBREAK, match_opcode, 0 },          
+{&quot;sbreak&quot;,    &quot;C&quot;,   &quot;&quot;,  MATCH_C_EBREAK, MASK_C_EBREAK, match_opcode, INSN_ALIAS },
+{&quot;sbreak&quot;,    &quot;I&quot;,   &quot;&quot;,    MATCH_EBREAK, MASK_EBREAK, match_opcode, INSN_ALIAS },
+....
+....
+....
+{&quot;mod&quot;,       &quot;I&quot;,   &quot;d,s,t&quot;,  MATCH_MOD, MASK_MOD, match_opcode, 0 }
+....
+....
+</code></pre>
+
+<p>Now compile the riscv-gnu-toolchain again and you are done.</p>
+
+<p>Lets write a program and see if the RISCV assembler can use the mod instruction:</p>
+
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int main(){
+  int a,b,c;
+  a = 5;
+  b = 2;
+  asm volatile
+  (
+    &quot;mod   %[z], %[x], %[y]\n\t&quot;
+    : [z] &quot;=r&quot; (c)
+    : [x] &quot;r&quot; (a), [y] &quot;r&quot; (b)
+  )  
+ 
+  if ( c != 1 ){
+     printf(&quot;\n[[FAILED]]\n&quot;);
+     return -1;
+  }
+  
+  printf(&quot;\n[[PASSED]]\n&quot;);
+
+  return 0;
+}
+</code></pre>
+
+<p>Compile it using the modified RISCV compiler</p>
+
+<pre><code class="language-bash">$ riscv64-unknown-elf-gcc mod.c -o mod
+</code></pre>
+
+<p>Now do an object dump to see that the mod instruction is actually used:</p>
+
+<pre><code class="language-bash">$ riscv64-unknown-elf-objdump -dC mod &gt; mod.dump
+</code></pre>
+
+<p>Now open mod.dump and you will be able to see that mod instruction has been used.</p>
+
+<p>I will later add how you can modify the ISA simulator to test the newly added instruction and how you can modify gem5 to be able to exexcute this instruction.</p>
+
+<h1 id="adding-the-new-instruction-to-gem5">Adding the new instruction to gem5</h1>
+
+<p>To add the instruction gem5 we need to modify arch/riscv/decoder.isa like this:</p>
+
+<pre><code class="language-C">    0x33: decode FUNCT3 {
+        format ROp {
+            0x0: decode FUNCT7 {
+                0x0: add({{
+                    Rd = Rs1_sd + Rs2_sd;
+                }});
+                0x1: mul({{
+                    Rd = Rs1_sd*Rs2_sd;
+                }}, IntMultOp);
+                0x10: mod({{
+                    Rd = Rs1_sd % Rs2_sd;
+                }});
+                0x20: sub({{
+                    Rd = Rs1_sd - Rs2_sd;
+                }});
+            }
+</code></pre>
+
+<p>Here 0x33 is the opcode and 0x10 is the the funct7. The details about different fields in the RISC-V ISA can be seen from page no. 50 of the manual <a href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2014/EECS-2014-54.pdf" target="_blank">here</a>.</p>
+
+<p>Note the instruction matching in the assembler is done something like this:</p>
+
+<pre><code class="language-C">((insn ^ op-&gt;match) &amp; op-&gt;mask) == 0;
+</code></pre>
+
+<p>See match_opcode() fucntion in riscv-gnu-toolchain/riscv-binutils-gdb/opcodes/riscv-opc.c</p>
+
+<p>op-&gt;match and op-&gt;mask are the MATCH and MASK macros that we defined.</p>
+
+<p>This means if you just see the 1 bits in the MATCH in the instruction and flip them,
+and then see the mask bits then everything should be 0. MASK tells which bits are
+of interest and MATCH tells what is the configuration required.</p>
+
+<h1 id="adding-the-custom-instruction-to-spike-isa-simulator">Adding the custom instruction to spike ISA simulator</h1>
+
+<p>In the riscv-isa-sim/riscv/encoding.h add the following lines:</p>
+
+<pre><code>#define MATCH_MOD 0x200006b                                                    
+#define MASK_MOD 0xfe00707f
+...
+DECLARE_INSN(add, MATCH_MOD, MASK_MOD)
+</code></pre>
+
+<p>Create a file riscv-isa-sim/riscv/insns/mod.h and add these lines:</p>
+
+<pre><code>WRITE_RD(sext_xlen(RS1 % RS2));
+</code></pre>
+
+<p>Add this file to riscv-isa-sim/riscv/riscv.mk.in</p>
+
+<pre><code>riscv_insn_list = \
+      ...
+      mod \
+      ...
+</code></pre>
+
+<p>In riscv-isa-sim/spike_main/disasm.cc add the following lines:</p>
+
+<pre><code>DEFINE_RTYPE(mod);
+</code></pre>
+
+<p>And now build riscv-tools again. The &ldquo;mod&rdquo; instruction has been added to spike
+simulator</p>
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="https://nitish2112.github.io/post/statistics-gem5/"><span
+      aria-hidden="true">&larr;</span> Adding custom statistics to gem5</a></li>
+    
+
+    
+    <li class="next"><a href="https://nitish2112.github.io/post/halide/">A brief overview of Halide <span
+      aria-hidden="true">&rarr;</span></a></li>
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+<section id="comments">
+  <div id="disqus_thread">
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nitish2112-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2016 Nitish Srivastava &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.2/imagesloaded.pkgd.min.js" integrity="sha512-iHzEu7GbSc705hE2skyH6/AlTpOfBmkx7nUqTLGzPYR+C1tRaItbRlJ7hT/D3YQ9SV0fqLKzp4XY9wKulTBGTw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js" integrity="sha512-Z5heTz36xTemt1TbtbfXtTq5lMfYnOkXM2/eWcTTiLU01+Sw4ku1i7vScDc8fWhrP2abz9GQzgKH5NGBLoYlAw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/plugins/ScrollToPlugin.min.js" integrity="sha512-CDeU7pRtkPX6XJtF/gcFWlEwyaX7mcAp5sO3VIu/ylsdR74wEw4wmBpD5yYTrmMAiAboi9thyBUr1vXRPA7t0Q==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    
+    <script src="../../js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+

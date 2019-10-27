@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yi Xue Chong on Yi Xue Chong</title>
+    <link>https://nitish2112.github.io/</link>
+    <description>Recent content in Yi Xue Chong on Yi Xue Chong</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Yi Xue Chong</copyright>
+    <lastBuildDate>Sat, 20 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+  </channel>
+</rss>

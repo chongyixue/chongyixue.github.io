@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>1 on Nitish Srivastava</title>
+    <link>https://nitish2112.github.io/publication_types/1/</link>
+    <description>Recent content in 1 on Nitish Srivastava</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Nitish Srivastava</copyright>
+    <lastBuildDate>Wed, 17 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nitish2112.github.io/publication_types/1/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>T2S-Tensor: Productively Generating High-Performance Spatial Hardware for Dense Tensor Computations</title>
+      <link>https://nitish2112.github.io/publication/t2s-tensor/</link>
+      <pubDate>Wed, 17 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nitish2112.github.io/publication/t2s-tensor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Operation Dependent Frequency Scaling Using Desynchronization</title>
+      <link>https://nitish2112.github.io/publication/desynchronization/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nitish2112.github.io/publication/desynchronization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rosetta: A Realistic High-Level Synthesis Benchmark Suite for Software Programmable FPGAs</title>
+      <link>https://nitish2112.github.io/publication/rosetta/</link>
+      <pubDate>Thu, 10 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nitish2112.github.io/publication/rosetta/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Accelerating Face Detection on Programmable SoC Using C-Based Synthesis</title>
+      <link>https://nitish2112.github.io/publication/face-detect/</link>
+      <pubDate>Fri, 10 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://nitish2112.github.io/publication/face-detect/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Flexible and Dynamic Power Allocation in Broadband Multi-Beam Satellites</title>
+      <link>https://nitish2112.github.io/publication/dynamic-power-satellite/</link>
+      <pubDate>Fri, 10 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://nitish2112.github.io/publication/dynamic-power-satellite/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
