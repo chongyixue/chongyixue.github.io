@@ -12,5 +12,14 @@
 	<atom:link href="https://chongyixue.github.io/publication/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>Name of my paper</title>
+      <link>https://chongyixue.github.io/publication/nature/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://chongyixue.github.io/publication/nature/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

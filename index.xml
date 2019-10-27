@@ -10,5 +10,24 @@
     <lastBuildDate>Sat, 20 Apr 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
+    <item>
+      <title>Name of my paper</title>
+      <link>https://chongyixue.github.io/publication/nature/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://chongyixue.github.io/publication/nature/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mahjong Tutorial</title>
+      <link>https://chongyixue.github.io/post/mahjong-tutorial/</link>
+      <pubDate>Mon, 10 Jul 2017 10:09:32 -0400</pubDate>
+      
+      <guid>https://chongyixue.github.io/post/mahjong-tutorial/</guid>
+      <description>&lt;p&gt;
+This is a tutorial on Mahjong.&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
