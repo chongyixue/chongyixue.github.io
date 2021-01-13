@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on Yi Xue Chong</title>
-    <link>https://chongyixue.github.io/project/</link>
-    <description>Recent content in Projects on Yi Xue Chong</description>
+    <title>Dost on Yi Xue Chong</title>
+    <link>https://chongyixue.github.io/tags/dost/</link>
+    <description>Recent content in Dost on Yi Xue Chong</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2019 Yi Xue Chong</copyright>
     <lastBuildDate>Wed, 13 Jan 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://chongyixue.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chongyixue.github.io/tags/dost/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       
       <guid>https://chongyixue.github.io/project/insight/</guid>
       <description>#Mahjong Tutorial! +++</description>
-    </item>
-    
-    <item>
-      <title>Mahjong Tutorial</title>
-      <link>https://chongyixue.github.io/project/mahjong-tutorial/</link>
-      <pubDate>Mon, 28 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://chongyixue.github.io/project/mahjong-tutorial/</guid>
-      <description>Mahjong Tutorial! +++</description>
     </item>
     
   </channel>
